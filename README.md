@@ -1,2 +1,2 @@
 # streams
-streams avdrlays and widgetthemes
+streams overlays and widget themes
