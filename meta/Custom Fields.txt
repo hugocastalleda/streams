@@ -1,0 +1,22 @@
+{
+  "textColor": {
+    "label": "Text color",
+    "type": "colorpicker",
+    "value": "#FFFFFF"
+  },
+  "textShadowColor": {
+    "label": "Text shadow color",
+    "type": "colorpicker",
+    "value": "#000000"
+  },
+  "barHueRotation": {
+    "label": "Bar color hue rotation",
+    "type": "slider",
+    "min": 0,
+    "max": 360,
+    "steps": 3,
+    "value": 0
+  },
+  "_id": "47d6abb284a6b7de48d3d9c7a1e6465b",
+  "priority": 10
+}

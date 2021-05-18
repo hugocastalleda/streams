@@ -1,0 +1,39 @@
+<!-- All html objects will be wrapped in the #wrap div -->
+<div id='boss_container' class='boss_cont'>
+  <div id='background'></div>
+  <div id='border'></div>
+
+  <div id='user_hp_bg'>
+    <div id='constant_text'>
+      <div id='user_info'>
+        <div id='username'></div>
+      </div>
+      <div id='health_text'>
+        <span>HP</span>
+        <span id='current_health'>0</span>
+        <span>/</span>
+        <span id='total_health'>0</span>
+      </div>
+    </div>
+    <div id='health_bar'>
+      <div id='current_bar'></div>
+      <div id='total_bar'></div>
+    </div>
+  </div>
+
+  <div id='user_hp_wrapper'>
+    <div id='user_hp_cont'>
+
+      <div id='event_text'>
+        <div id='damage'></div>
+        <div id='message'></div>
+      </div>
+
+      <div id='user_pic_wrapper'>
+        <div class='user_pic_cont'>
+          <img id='user_pic' src=''\>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

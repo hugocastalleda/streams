@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css?family={fontFamily}:100,300,400,500,700,900&display=swap');
+
+:root {
+  --maxImgWidth: {maxImgWidth}px;
+  --maxImgHeight: {maxImgHeight}px;
+
+  --topFirst: {topFirst};
+  --topSecond: {topSecond};
+  --topFont: {topFontColor};
+  --botFirst: {botFirst};
+  --botSecond: {botSecond};
+  --botFont: {botFontColor};
+
+  --topBgOpacity: calc({topBgOpacity} * .01);
+  --botBgOpacity: calc({botBgOpacity} * .01);
+  --topFontSize: {topFontSize}px;
+  --botFontSize: {botFontSize}px;
+
+  --imgSwipe: {imgSwipe};
+  --imageMargin: {imageMargin}px;
+  --textBoxMargin: {textBoxMargin}px;
+
+  --textAlignment: {alignment}; /* center; left right center */
+
+  --maxWidth: 1000px;
+
+  --fontFamily: {fontFamily}, sans-serif;
+  --fontWeight: {fontWeight};
+}
+
+.widget-AlertBox {
+    position: relative;
+}
+body,
+html {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+#wrap {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+#alert-box {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+#alert-box.hidden,
+.hidden {
+    opacity: 0;
+}
+#alert-user-message img {
+    vertical-align: middle;
+    height: 1em;
+}
+
+#alertHolder {
+  position: relative;
+  text-align: var(--textAlignment);
+  margin-top: 20px;
+  opacity: 0;
+}
+
+#imageHolder {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  margin-bottom: var(--imageMargin);
+}
+
+#topArea {
+  margin-bottom: var(--textBoxMargin);
+}
+
+#imageHolder img, #imageHolder video {
+  max-width: var(--maxImgWidth);
+  max-height: var(--maxImgHeight);
+  width: auto;
+  height: auto;
+  vertical-align: bottom;
+}
+
+html,body{
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+}
+
+.lineHolder {
+  position: relative;
+}
+
+.textHolder {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.text {
+  position: relative;
+  z-index: 999;
+  padding: 6px 20px;
+}
+
+.bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+#imgBg {
+  background: var(--imgSwipe);
+  vertical-align: bottom;
+}
+#topBg {
+  background: var(--topSecond);
+  opacity: var(--topBgOpacity);
+}
+#botBg {
+  background: var(--botSecond);
+  opacity: var(--botBgOpacity);
+}
+
+
+#topBgAbove{
+  background: var(--topFirst);
+  z-index: 999;
+}
+#botBgAbove{
+  background: var(--botFirst);
+  z-index: 999;
+}
+
+#topText {
+  font-size: var(--topFontSize);
+  color: {topFontColor};
+}
+#botText {
+  font-size: var(--botFontSize);
+  color: {botFontColor};
+}
+#messageHolder {
+  margin-top: 10px;
+  color: #FFF;
+  text-align: var(--textAlignment);
+}
+#alert-user-message {
+  color: #FFF;
+  text-align: var(--textAlignment);
+  display: inline-block;
+  max-width: 600px;
+  text-shadow: 0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000;
+}

@@ -1,0 +1,184 @@
+(function () {
+
+var animateImg = {animateImg}, // true false
+    hideImg = false,
+    barsAnimation = "{barsAnimation}", // fromLeft fromTop fromRight fromBot
+    textAnimation = "{textAnimation}", // fromLeft fromTop fromRight fromBot none
+    textStaggerTop = "{textStagger}", // 0 "center" "end"
+    terxtStaggerBottom = "{textStagger}", // 0 "center" "end"
+    msgDirection = "{msgDirection}", // fromLeft fromTop fromRight fromBot none
+    delayTime = {delayTime} * 1000;
+
+var barsX, barsY, textX, textY, msgX, msgY, msgXOut, msgYOut;
+
+if(hideImg){
+  $("#imageHolder").hide();
+}
+$("#alertImg").on('error', function(){
+  $("#alertImg").remove();
+});
+
+if(barsAnimation == "fromLeft"){
+  barInX = "-101%";
+  barInY = "0%";
+  barOutX = "+101%";
+  barOutY = "0%"
+} else if(barsAnimation == "fromTop") {
+  barInX = "0%";
+  barInY = "-101%";
+  barOutX = "0%";
+  barOutY = "+101%"
+} else if(barsAnimation == "fromRight") {
+  barInX = "101%";
+  barInY = "0%";
+  barOutX = "-101%";
+  barOutY = "0%"
+} else if(barsAnimation == "fromBot") {
+  barInX = "0%";
+  barInY = "101%";
+  barOutX = "0%";
+  barOutY = "-101%"
+}
+
+if(textAnimation == "fromLeft"){
+  textX = "-30%";
+  textY = "0%";
+} else if(textAnimation == "fromTop") {
+  textX = "0%";
+  textY = "-30%";
+} else if(textAnimation == "fromRight") {
+  textX = "30%";
+  textY = "0%";
+} else if(textAnimation == "fromBot") {
+  textX = "0%";
+  textY = "30%";
+} else if(textAnimation == "none") {
+  textX = "0%";
+  textY = "0%";
+}
+
+if(msgDirection == "fromLeft"){
+  msgX = "-=20px";
+  msgY = "0%";
+} else if(msgDirection == "fromTop") {
+  msgX = "0%";
+  msgY = "-50%";
+} else if(msgDirection == "fromRight") {
+  msgX = "+=20px";
+  msgY = "0%";
+} else if(msgDirection == "fromBot") {
+  msgX = "0%";
+  msgY = "50%";
+} else if(msgDirection == "none") {
+  msgX = "0%";
+  msgY = "0%";
+}
+
+  function loadScript (url) {
+    return new Promise(function (resolve, reject) {
+      const script = document.createElement('script')
+      script.onload = resolve
+      script.onerror = reject
+
+      script.src = url
+
+      document.head.appendChild(script)
+    })
+  }
+  loadScript('https://ext-assets.streamlabs.com/users/140067/gsap2-1-2.js').then(function () {
+    loadScript('https://ext-assets.streamlabs.com/users/140067/SplitText-2-1-2.min.js').then(function () {
+      animate();
+    });
+  });
+
+
+var animate = function() {
+
+  var tl = new TimelineMax(),
+      imgTl = new TimelineMax({paused: true}),
+      topTl = new TimelineMax({paused: true}),
+      botTl = new TimelineMax({paused: true, onComplete: reverseIt}),
+      msgTl = new TimelineMax({paused: true}),
+      topSplit = new SplitText("#topText", {type:"chars"}),
+      botSplit = new SplitText("#botText", {type:"chars"}),
+      msgSplit = new SplitText("#alert-user-message", {type:"lines"}),
+      topChars = topSplit.chars,
+      botChars = botSplit.chars,
+      msgLines = msgSplit.lines
+  ;
+
+tl.timeScale(1);
+topTl.timeScale(1);
+botTl.timeScale(1);
+
+tl
+  .to("#alertHolder", .1, {delay: .1, opacity: 1, onComplete: playImg})
+
+if(animateImg){
+  imgTl
+    .from("#imgBg", 0.4, {x: barInX, y: barInY, ease: Power4.easeInOut, onStart: playTop})
+    .from("#alertImg", 0, {opacity: 0})
+    .to("#imgBg", 0.4, {x: barOutX, y: barOutY, ease: Power4.easeInOut})
+} else {
+  TweenMax.set("#imgBg", {opacity: 0})
+
+  imgTl
+    .from("#alertImg", 1, {opacity: 0, onStart: playTop})
+}
+
+topTl
+  .from("#topBgAbove", 0.8, {x: barInX, y: barInY, delay: 0.4, ease: Power4.easeInOut, onStart: playBot})
+  .from("#topBg", 0, {opacity: 0})
+  .to("#topBgAbove", .8, {x: barOutX, y: barOutY, delay: 0.4, ease: Power4.easeInOut, delay: .2})
+  .staggerFrom(topChars, 0.4, {opacity:0, x: textX, y: textY, ease: Power1.easeOut, stagger: {
+    from: textStaggerTop,
+    amount: .4,
+    ease: Power4.EaseOut
+  }}, null, "-=.4")
+
+botTl
+  .from("#botBgAbove", .8, {x: barInX, y: barInY, delay: 0.4, ease: Power4.easeInOut})
+  .from("#botBg", 0, {opacity: 0})
+  .to("#botBgAbove", .8, {x: barOutX, y: barOutY, delay: 0.4, ease: Power4.easeInOut, delay: .2})
+  .staggerFrom(botChars, 0.4, {opacity:0, x: textX, y: textY, ease: Power1.easeOut, stagger: {
+    from: terxtStaggerBottom,
+    amount: .4,
+    ease: Power4.EaseOut
+  }}, null, "-=.4")
+
+msgTl
+  .staggerFrom(msgLines, 1.4, {opacity:0, x: msgX, y: msgY, ease: Power2.easeOut}, 0.1)
+  .set(msgLines, {onStart: pauseMsg})
+  .staggerTo(msgLines, 1, {delay: .2, opacity:0, x: msgX, y: msgY, ease: Power2.easeIn}, -0.2)
+;
+
+function playImg(){
+  imgTl.play();
+}
+
+function playTop(){
+  topTl.play();
+}
+
+function playBot(){
+  botTl.play();
+  setTimeout(function(){
+    msgTl.play();
+  }, 800);
+}
+
+function reverseIt(){
+  setTimeout(function(){
+    imgTl.reverse().timeScale(0.4);
+    topTl.reverse().timeScale(1.2);
+    botTl.reverse().timeScale(1.2);
+    msgTl.play();
+  }, delayTime);
+}
+
+function pauseMsg(){
+  msgTl.pause();
+}
+
+  } // end of animate function
+}());  // end of function wrapper

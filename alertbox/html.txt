@@ -1,0 +1,22 @@
+<div id="alertHolder">
+  <div id="imageHolder">
+    <img id="alertImg" src="{imageFile}">
+  </div>
+  <div id="topArea" class="lineHolder">
+    <div class="textHolder">
+      <div id="topBg" class="bg"></div>
+      <div id="topText" class="text">{topText}</div>
+      <div id="topBgAbove" class="bg"></div>
+    </div>
+  </div>
+  <div id="botArea" class="lineHolder">
+    <div class="textHolder">
+      <div id="botBg" class="bg"></div>
+      <div id="botText" class="text">{botText}</div>
+      <div id="botBgAbove" class="bg"></div>
+    </div>
+  </div>
+  <div id="messageHolder">
+    <div id="alert-user-message">{userMessage}</div>
+  </div>
+</div>

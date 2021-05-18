@@ -1,0 +1,77 @@
+document.addEventListener('bossLoad', function(obj) {
+  // obj.detail will contain information about the current boss
+  // this will fire only once when the widget loads
+  console.log(obj.detail);
+  $('#user_pic').attr('src', obj.detail.boss_img);
+  $('#current_health').text(obj.detail.current_health);
+  $('#total_health').text(obj.detail.total_health);
+  $('#username').text(obj.detail.boss_name);
+  // Set initial health bar
+  var percent = obj.detail.current_health / obj.detail.total_health;
+  var barWidth = Math.max(Math.round(444 * percent), 0);
+  $('#current_bar').css("width", barWidth + "px");
+});
+document.addEventListener('bossDamaged', function(obj) {
+  // obj.detail will contain information about the boss and a
+  // custom message
+  console.log(obj.detail);
+  $('#current_health').text(obj.detail.boss.current_health);
+  $('#message').text(obj.detail.message.text);
+  $('#damage').text(obj.detail.message.damage);
+  var type = obj.detail.message.type;
+  if(type == "heal")
+    $('#damage').css("background-color", "green");
+  else
+    $('#damage').css("background-color", "red");
+
+  // set new bar width
+  var percent = obj.detail.boss.current_health / obj.detail.boss.total_health;
+  var barWidth = Math.max(Math.round(444 * percent), 0);
+  $('#current_bar').css("width", barWidth + "px");
+
+  // message animation
+  $('#message').removeClass('fadeinout').width(); // reading width() forces reflow
+  $('#message').addClass('fadeinout');
+  $('#damage').removeClass('fadeinout').width(); // reading width() forces reflow
+  $('#damage').addClass('fadeinout');
+  $('#border').removeClass('expandborder').width();;
+  $('#border').addClass('expandborder');
+  $('#background').removeClass('expandbg').width();;
+  $('#background').addClass('expandbg');
+
+  // user pic animation
+  $('#user_pic').removeClass('flashfast').width(); // reading width() forces reflow
+  $('#user_pic').addClass('flashfast');
+});
+// Similarly for for when a boss is killed
+document.addEventListener('bossKilled', function(obj) {
+  console.log(obj.detail);
+  $('#username').text(obj.detail.boss.boss_name);
+  $('#user_pic').attr('src', obj.detail.boss.boss_img);
+  $('#current_health').text(obj.detail.boss.current_health);
+  $('#total_health').text(obj.detail.boss.total_health);
+  $('#message').text(obj.detail.message.text);
+  $('#damage').text(obj.detail.message.damage);
+  var type = obj.detail.message.type;
+  if(type == "heal")
+    $('#damage').css("background-color", "green");
+  else
+    $('#damage').css("background-color", "red");
+
+  // set new bar width
+  $('#current_bar').css("width", "444px");
+
+  // message animation
+  $('#message').removeClass('fadeinout').width(); // reading width() forces reflow
+  $('#message').addClass('fadeinout');
+  $('#damage').removeClass('fadeinout').width(); // reading width() forces reflow
+  $('#damage').addClass('fadeinout');
+  $('#border').removeClass('expandborder').width();;
+  $('#border').addClass('expandborder');
+  $('#background').removeClass('expandbg').width();;
+  $('#background').addClass('expandbg');
+
+  // kill animation
+  $('#boss_container').removeClass('flashslow').width(); // reading width() forces reflow
+  $('#boss_container').addClass('flashslow');
+});
