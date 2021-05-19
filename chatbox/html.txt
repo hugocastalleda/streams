@@ -1,0 +1,48 @@
+<!-- item will be appened to this layout -->
+<div id="log_cont">
+  <div id="log" class="sl__chat__layout">
+	</div>
+</div>
+
+<img id="chat_label" src="https://s3.us-east-2.amazonaws.com/streamlabs-designers/blueviolet/1519703635CHAT.png"/>
+
+<!-- chat item -->
+<script type="text/template" id="chatlist_item">
+  <div data-from="{from}" data-id="{messageId}">
+    <span class="outline">
+      <span class="meta" style="background: {color}">
+        <span class="badges">
+        </span>
+        <span class="name">{from}</span>
+      </span>
+    </span>
+		<span class="bar">
+    </span>
+    
+    <span class="message-outline">
+      <span class="message">
+        {message}
+      </span>
+    </span>
+  </div>
+</script>
+
+<svg>
+  <defs>
+    <clipPath id="meta-outline">
+      <polygon points="0,0 275,5 275,60 5,66"/>
+    </clipPath>
+    <clipPath id="meta-polygon">
+      <polygon points="5,7 270,10 270,55 10,61"/>
+    </clipPath>
+    <clipPath id="message-outline">
+      <polygon points="0,35 20,20 25,25 30,22 32,10 435,0 395,400 0,400 27,47 20,50 14,40"/>
+    </clipPath>
+    <clipPath id="message-polygon">
+      <polygon points="5,35 19,25 24,30 32,27 34,15 425,5 390,395 4,395 31,42 20,45 18,37"/>
+    </clipPath>
+    <clipPath id="chat-polygon">
+      <polygon points="20,20 780,20 780,980 20,980"/>
+    </clipPath>
+  </defs>
+</svg> 

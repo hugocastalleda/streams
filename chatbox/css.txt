@@ -1,0 +1,170 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:700);
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  text-shadow: 0 0 1px #000, 0 0 2px #000;
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: {font_size};
+  line-height: 1.5em;
+  color: {text_color};
+}
+
+#custom_html {
+  width: 800px;
+  padding-top: 40px;
+  /*background: url("https://s3.us-east-2.amazonaws.com/streamlabs-designers/blueviolet/1519700917chatBackground.png");*/
+  background-repeat: no-repeat;
+}
+
+#chat_label {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+#log>div {
+  animation: fadeInRight .3s ease forwards, fadeOut 0.5s ease {message_hide_delay} forwards;
+  -webkit-animation: fadeInRight .3s ease forwards, fadeOut 0.5s ease {message_hide_delay} forwards;
+}
+
+.colon {
+  display: none;
+}
+
+#log_cont {
+  position: absolute;
+  top: 24px;
+  left: 0px;
+  width: 800px;
+  height: {chatHeight};
+  overflow: hidden;
+}
+
+#log {
+  display: table;
+  position: absolute;
+  bottom: 0;
+  left: 30px;
+  padding: 20px 10px 40px;
+  width: 100%;
+  table-layout: fixed;
+  /*-webkit-clip-path: url("#chat-polygon");
+  clip-path: url("#chat-polygon");*/
+}
+
+#log>div {
+}
+
+#log>div.deleted {
+  visibility: hidden;
+}
+
+#log>div:nth-child(2n) {
+  margin-left: 20px;
+}
+
+.bar {
+  display: inline-block;
+  background: black;
+  width: 60px;
+  height: 80px;
+  position: relative;
+  top: 20px;
+  left: -200px;
+  z-index: -1;
+  transform: skewX(45deg);
+}
+
+#log>div:nth-child(2n)>.bar {
+  transform: skewX(-45deg);
+}
+
+#log .emote {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  padding: 0.4em 0.2em;
+  position: relative;
+}
+
+#log .emote img {
+  display: inline-block;
+  height: 1em;
+  opacity: 0;
+}
+
+#log .message,#log .meta {
+  vertical-align: top;
+  display: table-cell;
+  padding-bottom: 0.1em;
+}
+
+#log .outline {
+  width: 275px;
+  height: 70px;
+  vertical-align: top;
+  background: white;
+  display: inline-block;
+  -webkit-clip-path: url("#meta-outline");
+  clip-path: url("#meta-outline");
+  margin-bottom: 10px;
+}
+
+#log .meta {
+  width: 275px;
+  height: 70px;
+  line-height: 70px;
+  text-align: left;
+  padding-left: 13px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: white;
+  -webkit-clip-path: url("#meta-polygon");
+  clip-path: url("#meta-polygon");
+}
+
+#log .message-outline {
+  width: 500px;
+  height: 70px;
+  margin-left: -90px;
+  background: white;
+  display: inline-block;
+  -webkit-clip-path: url("#message-outline");
+  clip-path: url("#message-outline");
+  margin-bottom: 10px;
+}
+
+#log .message {
+  word-wrap: break-word;
+  padding-top: 20px;
+  padding-bottom: 15px;
+  padding-left: 40px;
+  padding-right: 30px;
+  width: 430px;
+  background: black;
+  -webkit-clip-path: url("#message-polygon");
+  clip-path: url("#message-polygon");
+}
+
+.badge {
+  display: inline-block;
+  margin-right: 0.2em;
+  position: relative;
+  height: 1em;
+  vertical-align: middle;
+  top: -0.1em;
+}
+
+.name {
+  margin-left: 0.2em;
+}

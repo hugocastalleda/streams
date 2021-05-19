@@ -1,0 +1,25 @@
+// Please use event listeners to run functions.
+document.addEventListener('onLoad', function(obj) {
+	// obj will be empty for chat widget
+	// this will fire only once when the widget loads
+});
+
+document.addEventListener('onEventReceived', function(obj) {
+  // obj will contain information about the event
+	var messages = document.getElementsByClassName("message");
+  var messageOutlines = document.getElementsByClassName("message-outline");
+  var bars = document.getElementsByClassName("bar");
+	for (var i = 0; i < messages.length; i++) {
+    if(messages[i].clientHeight > 72) {
+      $(messageOutlines[i]).css('height', messages[i].clientHeight+5);
+      $(bars[i]).css('height', messages[i].clientHeight+5);
+      var skew = $(bars[i]).css('transform').search('-');
+      if(skew < 0) {
+        $(bars[i]).css('transform', 'skewX(25deg)');
+      }
+      else {
+        $(bars[i]).css('transform', 'skewX(-25deg)');
+      }
+    }
+	}
+});

@@ -1,0 +1,11 @@
+{
+  "chatHeight": {
+    "label": "Chat Height (1300 for Intermission Scene)",
+    "type": "slider",
+    "name": "",
+    "value": 960,
+    "max": 1260,
+    "min": 960,
+    "steps": 1
+  }
+}
